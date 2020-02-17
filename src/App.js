@@ -15,12 +15,14 @@ import { setCurrentUser } from './redux/user/user.actions';
 import CheckoutPage from './pages/checkout/checkout.component';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
+import { toggleCartHidden } from './redux/cart/cart.actions';
 
 class App extends React.Component{
 
     unsubscribeFromAuth = null;
    
     componentDidMount(){
+      //this.props.toggleCartHidden();
       this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
         //this.setState({currentUser:user});
         //createUserProfileDocument(user);
@@ -41,6 +43,7 @@ class App extends React.Component{
     componentWillUnmount(){
       this.unsubscribeFromAuth();
     }
+    
     render() {
       return ( 
         <div className = "App">
@@ -68,7 +71,8 @@ const mapStateToProps =  createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
