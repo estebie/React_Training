@@ -16,12 +16,13 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import { toggleCartHidden } from './redux/cart/cart.actions';
+import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 
 class App extends React.Component{
 
     unsubscribeFromAuth = null;
-   
-    componentDidMount(){
+    componentDidMount() {
+
       //this.props.toggleCartHidden();
       this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
         //this.setState({currentUser:user});
@@ -38,6 +39,7 @@ class App extends React.Component{
         }
  
         this.props.setCurrentUser(userAuth);
+        //addCollectionAndDocuments('collections', this.props.collectionsArray.map(({title, items})=> ({title, items})));
       });
     }
     componentWillUnmount(){
@@ -67,7 +69,8 @@ class App extends React.Component{
 }
 
 const mapStateToProps =  createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview
 })
 
 const mapDispatchToProps = dispatch => ({
