@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 }
 
 export const shopReducer = (state = INITIAL_STATE, action) => {
-    console.log();
+    console.log('test');
     switch (action.type) {
         case ShopActionTypes.UPDATE_COLLECTIONS:
             return {
