@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 }
 
 export const shopReducer = (state = INITIAL_STATE, action) => {
-    console.log('test');
     switch (action.type) {
         case ShopActionTypes.FETCH_COLLECTIONS_START:
             return {
