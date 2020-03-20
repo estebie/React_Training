@@ -15,8 +15,15 @@ import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import { toggleCartHidden } from './redux/cart/cart.actions';
 import { selectCollectionsForPreview } from './redux/shop/shop.selector';
+import {checkUserSession} from './redux/user/user.actions';
 
 class App extends React.Component{
+
+
+    componentDidMount(){
+      const {checkUserSession} = this.props;
+      checkUserSession();
+    }
     render() {
       return ( 
         <div className = "App">
@@ -45,7 +52,8 @@ const mapStateToProps =  createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  toggleCartHidden: () => dispatch(toggleCartHidden())
+  toggleCartHidden: () => dispatch(toggleCartHidden()),
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
